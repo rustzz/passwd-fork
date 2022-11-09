@@ -1,9 +1,9 @@
-name: Run flutter tests
+name: Build APK
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  apk:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -14,4 +14,4 @@ jobs:
       - run: flutter channel master
       - run: flutter upgrade --force
       - run: flutter pub get
-      - run: flutter test
+      - run: flutter build apk
