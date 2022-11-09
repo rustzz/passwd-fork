@@ -13,7 +13,7 @@ import 'export_service.dart';
 
 @LazySingleton(as: ExportService)
 class ExportImpl implements ExportService {
-  static const encryptedFileName = 'db1.passwd1';
+  static const encryptedFileName = 'db.passwd';
   static const unencryptedFileName = 'passwd_db.json';
 
   final pathService = locator<PathService>();
@@ -91,7 +91,7 @@ class ExportImpl implements ExportService {
     final externalDir = Platform.isWindows
         ? await pathService.getDocDir()
         : await pathService.getExternalDirectory();
-    final file = File(join(externalDir.path, './passwd_export.db1'));
+    final file = File(join(externalDir.path, './passwd_export.db'));
 
     final directory = await pathService.getDocDir();
     final encryptedDBFile = File(join(directory.path, encryptedFileName));

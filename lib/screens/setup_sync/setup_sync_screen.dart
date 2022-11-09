@@ -78,14 +78,24 @@ class _SetupSyncScreenState extends State<SetupSyncScreen> {
                       },
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     width: double.infinity,
-                    child: OutlineButton(
+                    child: ElevatedButton(
                       child: Text(
                         context.getString('register'),
+                        style: TextStyle(
+                          color: Theme.of(context).canvasColor,
+                        ),
                       ),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
+                      style: ButtonStyle(
+                        side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ),
                       onPressed: () {
                         push(true);

@@ -98,7 +98,7 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                       context: context,
                       barrierDismissible: false,
                       builder: (_) => AlertDialog(
-                        title: Text('Please Wait'),
+                        title: Text(context.getString('please_wait')),
                         content: LinearProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(
                             Theme.of(context).primaryColor,
@@ -113,8 +113,7 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                       final username = usernameController.text;
                       final password = passwordController.text;
 
-                      // TODO: handle erros
-
+                      // TODO: handle errors
                       if (widget.register) {
                         await Provider.of<DispatchFuture>(context,
                             listen: false)(
@@ -146,8 +145,8 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                         barrierDismissible: true,
                         builder: (_) => AlertDialog(
                           title: Text(widget.register
-                              ? 'Registration failed'
-                              : 'Login falied'),
+                              ? context.getString('registration_failed')
+                              : context.getString('login_failed')),
                         ),
                       );
 
@@ -172,8 +171,9 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
             TextFormField(
               controller: urlController,
               decoration: InputDecoration(
-                labelText: 'Server URL'.toUpperCase(),
-                errorText: isUrlValid ? null : 'The entered URL is not valid',
+                labelText: context.getString('server_url').toUpperCase(),
+                errorText:
+                    isUrlValid ? null : context.getString('server_url_invalid'),
               ),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.url,
@@ -187,9 +187,10 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
             TextFormField(
               controller: secretController,
               decoration: InputDecoration(
-                labelText: 'Server Secret'.toUpperCase(),
-                errorText:
-                    isSecretValid ? null : 'Server secret should not be empty',
+                labelText: context.getString('server_secret').toUpperCase(),
+                errorText: isSecretValid
+                    ? null
+                    : context.getString('server_secret_invalid'),
               ),
               // focusNode: usernameFocus,
               obscureText: true,
@@ -204,10 +205,10 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
             TextFormField(
               controller: usernameController,
               decoration: InputDecoration(
-                labelText: 'Username'.toUpperCase(),
+                labelText: context.getString('username').toUpperCase(),
                 errorText: isUsernameValid
                     ? null
-                    : 'Username should be more than 4 characters',
+                    : context.getString('username_invalid'),
               ),
               // focusNode: passwordFocus,
               obscureText: false,
@@ -226,7 +227,7 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                 labelText: context.getString('password').toUpperCase(),
                 errorText: isPasswordValid
                     ? null
-                    : 'Password should be more than 8 characters',
+                    : context.getString('password_invalid'),
               ),
               // focusNode: passwordFocus,
               obscureText: true,

@@ -95,15 +95,23 @@ class _TagsWidgetState extends State<TagsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Tags'.toUpperCase(),
+            context.getString('tags').toUpperCase(),
             style: TextStyle(
               fontSize: 13,
               letterSpacing: 1.5,
               color: Colors.white.withOpacity(0.5),
             ),
           ),
+          Text(
+            context.getString('under_construction'),
+            style: TextStyle(
+              fontSize: 12,
+              letterSpacing: 1.5,
+              color: Colors.white.withOpacity(0.3),
+            ),
+          ),
           SizedBox(
-            height: 2,
+            height: 10,
           ),
           Wrap(
             spacing: 8,
@@ -227,9 +235,11 @@ class _TagsWidgetState extends State<TagsWidget> {
                     setState(() => isChecked = val);
 
                     if (val) {
-                      addToCurrentTags(tag);
+                      // fix: Unsupported operation: Cannot remove from a fixed-length list
+                      // addToCurrentTags(tag);
                     } else {
-                      removeFromCurrentTags(tag);
+                      // fix: Unsupported operation: Cannot remove from a fixed-length list
+                      // removeFromCurrentTags(tag);
                     }
                   },
                 ),
@@ -261,7 +271,7 @@ class _TagsWidgetState extends State<TagsWidget> {
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Done'.toUpperCase(),
+                context.getString('done').toUpperCase(),
               ),
             ),
           ),
@@ -364,7 +374,7 @@ class _TagsWidgetState extends State<TagsWidget> {
                         newTagController.clear();
                       },
                       child: Text(
-                        'Cancel'.toUpperCase(),
+                        context.getString('cancel').toUpperCase(),
                       ),
                     ),
                     TextButton(
@@ -382,7 +392,7 @@ class _TagsWidgetState extends State<TagsWidget> {
                         }
                       },
                       child: Text(
-                        'Save'.toUpperCase(),
+                        context.getString('save').toUpperCase(),
                       ),
                     ),
                   ],

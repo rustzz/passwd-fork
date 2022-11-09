@@ -233,7 +233,7 @@ class CloudSyncImpl implements CloudSyncService {
           'Authorization': 'Bearer $accessToken',
         }),
         data: FormData.fromMap({
-          'db': MultipartFile.fromBytes(encryptedData, filename: 'db1.passwd1'),
+          'db': MultipartFile.fromBytes(encryptedData, filename: 'db.passwd'),
         }),
       );
 

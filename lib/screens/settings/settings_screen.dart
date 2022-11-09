@@ -15,29 +15,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final settingsItems = <Widget>[
-    if (Platform.isAndroid)
-      ListTile(
-        title: Text('Activate autofill service'), // TODO: localize
-        onTap: () async {
-          // TODO: abstract autofill
-          final response = await AutofillService().requestSetAutofillService();
-          Loggers.mainLogger.info(
-            'Autofill requestSetAutofillService: ${response}',
-          );
-        },
-      ),
-    SettingsSyncWidget(),
-    ExportSettingsWidget(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Settings',
+          context.getString('settings'),
           style: TextStyle(
             letterSpacing: 1.25,
             fontSize: 18,
@@ -53,9 +37,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           icon: Icon(Feather.x_circle),
         ),
       ),
-      body: ListView.builder(
-        itemCount: settingsItems.length,
-        itemBuilder: (context, i) => settingsItems[i],
+      body: ListView(
+        children: [
+          if (Platform.isAndroid)
+            ListTile(
+              title: Text(context.getString('activate_autofill_service')),
+              onTap: () async {
+                // TODO: abstract autofill
+                final response = await AutofillService().requestSetAutofillService();
+                Loggers.mainLogger.info(
+                  'Autofill requestSetAutofillService: ${response}',
+                );
+              },
+            ),
+          SettingsSyncWidget(),
+          ExportSettingsWidget(),
+        ],
       ),
     );
   }

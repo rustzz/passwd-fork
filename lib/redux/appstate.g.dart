@@ -28,7 +28,7 @@ abstract class $AppState {
           isLoggedIn: isLoggedIn ?? this.isLoggedIn);
   @override
   String toString() =>
-      "AppState(entries: $entries, isSyncing: $isSyncing, autofillLaunch: $autofillLaunch, isLoggedIn: $isLoggedIn)";
+      'AppState(entries: $entries, isSyncing: $isSyncing, autofillLaunch: $autofillLaunch, isLoggedIn: $isLoggedIn)';
   @override
   bool operator ==(Object other) =>
       other is AppState &&

@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:autofill_service/autofill_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dart_otp/dart_otp.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -185,11 +186,21 @@ class _HomeListItemState extends State<HomeListItem> {
         ),
       );
     } else {
+      var totp = TOTP(
+        secret: entry.otp.secret,
+        algorithm: OTPAlgorithm.SHA1,
+        digits: entry.otp.digits,
+        interval: entry.otp.timeout,
+      );
+
       final response = await AutofillService().resultWithDataset(
         label: entry.name ?? entry.username,
         username: entry.username,
         password: entry.password,
       );
+      
+      var currentOtp = totp.now();
+      await Clipboard.setData(ClipboardData(text: currentOtp));
 
       Loggers.mainLogger.info('autofill $response');
     }

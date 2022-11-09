@@ -17,7 +17,8 @@ class ExportSettingsWidget extends StatelessWidget {
           children: [
             if (Platform.isAndroid || Platform.isIOS)
               ListTile(
-                title: Text('Share Unencrypted'), // TODO: localize
+                title: Text(
+                    "${context.getString('share')} ${context.getString('unencrypted')}"),
                 onTap: () async {
                   Navigator.of(context).pop();
                   await exportShareUnencrypted(context);
@@ -25,7 +26,8 @@ class ExportSettingsWidget extends StatelessWidget {
               ),
             if (Platform.isAndroid || Platform.isIOS)
               ListTile(
-                title: Text('Share Encrypted'), // TODO: localize
+                title: Text(
+                    "${context.getString('share')} ${context.getString('encrypted')}"),
                 onTap: () async {
                   Navigator.of(context).pop();
                   await exportShareEncrypted(context);
@@ -33,7 +35,9 @@ class ExportSettingsWidget extends StatelessWidget {
               ),
             if (!Platform.isIOS)
               ListTile(
-                title: Text('Save Unencrypted'), // TODO: localize
+                title: Text(context.getString('save') +
+                    ' ' +
+                    context.getString('unencrypted')),
                 onTap: () async {
                   Navigator.of(context).pop();
                   await exportSaveUnencrypted(context);
@@ -41,7 +45,9 @@ class ExportSettingsWidget extends StatelessWidget {
               ),
             if (!Platform.isIOS)
               ListTile(
-                title: Text('Save Encrypted'), // TODO: localize
+                title: Text(context.getString('save') +
+                    ' ' +
+                    context.getString('encrypted')),
                 onTap: () async {
                   Navigator.of(context).pop();
                   await exportSaveEncrypted(context);
@@ -65,8 +71,8 @@ class ExportSettingsWidget extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: Text(context.getString('warning')),
         content: Text(
-          'To import the encrypted DB back, you will need to enter your pin',
-        ), // TODO: localize
+          context.getString('import_db_warn_pin'),
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -93,9 +99,8 @@ class ExportSettingsWidget extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Are you sure?'.toUpperCase()), // TODO: localize
-        content:
-            Text('The database export will be unencrypted'), // TODO: localize
+        title: Text(context.getString('are_you_sure').toUpperCase()),
+        content: Text(context.getString('export_unencrypted_warn')),
         actions: [
           TextButton(
             onPressed: () {
@@ -123,9 +128,8 @@ class ExportSettingsWidget extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Are you sure?'.toUpperCase()), // TODO: localize
-        content:
-            Text('The database export will be unencrypted'), // TODO: localize
+        title: Text(context.getString('are_you_sure').toUpperCase()),
+        content: Text(context.getString('export_unencrypted_warn')),
         actions: [
           TextButton(
             onPressed: () {
@@ -145,8 +149,8 @@ class ExportSettingsWidget extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    'Saved passwd.json to the documents directory',
-                  ), // TODO: localize
+                    context.getString('file_saved_to_docs'),
+                  ),
                 ),
               );
             },
@@ -162,8 +166,7 @@ class ExportSettingsWidget extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.getString('warning')),
-        content: Text(
-            'To import the encrypted DB back, you will need to enter your pin'), // TODO: localize
+        content: Text(context.getString('import_db_warn_pin')),
         actions: [
           TextButton(
             onPressed: () {
@@ -183,8 +186,8 @@ class ExportSettingsWidget extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    'Saved passwd_export.db1 to the documents directory',
-                  ), // TODO: localize
+                    context.getString('file_saved_to_docs'),
+                  ),
                 ),
               );
             },
@@ -198,7 +201,7 @@ class ExportSettingsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text('Export'), // TODO: localize
+      title: Text(context.getString('export')),
       onTap: () async {
         Loggers.mainLogger.info(
           'Export exportService requested',

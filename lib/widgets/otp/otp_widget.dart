@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dart_otp/dart_otp.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../constants/colors.dart';

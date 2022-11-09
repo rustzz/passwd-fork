@@ -14,9 +14,6 @@ class SettingsSyncWidget extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16,
       ),
-      leading: Icon(
-        state.isLoggedIn ? Icons.sync_outlined : Icons.sync_disabled_outlined,
-      ),
       title: Text(
         state.isLoggedIn
             ? context.getString('sync_enabled')

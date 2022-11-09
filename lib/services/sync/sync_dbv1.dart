@@ -19,7 +19,7 @@ import 'sync_service.dart';
 /// This uses XSalsa20-Poly1305 (NaCl secretbox) for encryption.
 @LazySingleton(as: SyncService)
 class SyncDBv1 implements SyncService {
-  static const fileName = 'db1.passwd1';
+  static const fileName = 'db.passwd';
   static const versionKey = 'CURRENT_DB_VERSION';
   static const version = 1;
 

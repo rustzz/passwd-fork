@@ -27,7 +27,7 @@ class PathPathProvider implements PathService {
     if (dirs.isEmpty) {
       throw UnsupportedError(
         'Exporting to the external storage is not avaiable on your platform',
-      ); // TODO: localize
+      );
     }
 
     return dirs[0];
