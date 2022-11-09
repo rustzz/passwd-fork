@@ -1,6 +1,14 @@
 name: Build APK
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
 
 jobs:
   apk:
@@ -12,6 +20,6 @@ jobs:
           flutter-version: 1.20.1
           channel: stable
       - run: flutter channel master
-      - run: flutter upgrade --force
+      # - run: flutter upgrade --force
       - run: flutter pub get
       - run: flutter build apk
