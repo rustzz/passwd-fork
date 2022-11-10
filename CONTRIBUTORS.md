@@ -9,7 +9,9 @@ Passwd wouldn't have been possible without the following people.
 - [ghnou (Dutch)](https://git.ghnou.su/ghnou)
 - [Tushar Sadhwani (Hindi)](https://github.com/tusharsadhwani)
 - [Akshit Garg (English, Hindi, French)](https://github.com/gargakshit)
+- [rustzz (Russian)](https://github.com/rustzz)
 
 # Code Contributions
 
 - [Akshit Garg](https://github.com/gargakshit)
+- [rustzz](https://github.com/rustzz)

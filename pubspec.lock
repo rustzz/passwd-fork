@@ -60,12 +60,10 @@ packages:
   autofill_service:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "089a61b7e292f9cba58664a2135ebc6e88eb9d08"
-      url: "https://github.com/gargakshit/autofill_service"
-    source: git
-    version: "0.0.1"
+      path: autofill_service
+      relative: true
+    source: path
+    version: "0.1.0"
   barcode_scan:
     dependency: "direct main"
     description:
@@ -485,6 +483,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  lints:
+    dependency: "direct dev"
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   logging:
     dependency: "direct main"
     description:
@@ -1037,5 +1042,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.12.0-0.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.22.0"
