@@ -271,6 +271,9 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
             horizontal: 16,
           ),
           children: [
+            SizedBox(
+              height: 10,
+            ),
             TextFormField(
               controller: nameController,
               decoration: InputDecoration(
@@ -282,7 +285,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               },
             ),
             SizedBox(
-              height: 12,
+              height: 10,
             ),
             TextFormField(
               controller: usernameController,
@@ -300,7 +303,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               },
             ),
             SizedBox(
-              height: 12,
+              height: 10,
             ),
             TextFormField(
               controller: passwordController,
@@ -318,7 +321,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               },
             ),
             SizedBox(
-              height: 12,
+              height: 10,
             ),
             Button(
               child: Text(
@@ -335,6 +338,9 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                 setPassword(generatedPassword);
               },
             ),
+            SizedBox(
+              height: 10,
+            ),
             TextFormField(
               controller: notesController,
               decoration: InputDecoration(
@@ -347,7 +353,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               },
             ),
             SizedBox(
-              height: 12,
+              height: 10,
             ),
             Builder(
               builder: (context) => Button(
@@ -404,14 +410,14 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
             ),
             if (isOtpAvailable)
               SizedBox(
-                height: 16,
+                height: 10,
               ),
             if (isOtpAvailable)
               OtpWidget(
                 otp: otp,
               ),
             SizedBox(
-              height: 16,
+              height: 10,
             ),
             TagsWidget(
               onChange: (newTags) {
@@ -423,7 +429,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               showAdd: true,
             ),
             SizedBox(
-              height: 16,
+              height: 10,
             ),
           ],
         ),

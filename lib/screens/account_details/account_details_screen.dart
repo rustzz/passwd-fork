@@ -157,13 +157,17 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
         ),
         children: [
           SizedBox(
-            height: 4,
+            height: 10,
           ),
           if (widget.entry.name.isNotEmpty)
             getRow(
-                context.getString('name_url').toUpperCase(), widget.entry.name),
-          getRow(context.getString('username_email').toUpperCase(),
-              widget.entry.username),
+              context.getString('name_url').toUpperCase(),
+              widget.entry.name,
+            ),
+          getRow(
+            context.getString('username_email').toUpperCase(),
+            widget.entry.username,
+          ),
           Builder(
             builder: (context) => TextButton(
               onPressed: () {
@@ -253,6 +257,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                 ),
               ),
             ),
+          SizedBox(
+            height: 10,
+          ),
           if (widget.entry.tags.isNotEmpty)
             SizedBox(
               height: 10,

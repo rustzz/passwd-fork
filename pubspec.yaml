@@ -1,6 +1,6 @@
 name: passwd
 description: A beautiful and secure password manager.
-version: 2.0.0+2
+version: 2.1.0+0
 author: Akshit Garg
 publish_to: none
 
@@ -27,7 +27,7 @@ dependencies:
   encrypt: ^4.1.0
   ez_localization: ^0.3.0+1
   flutter_icons: ^1.1.0
-  flutter_otp_text_field: ^0.0.1+1
+  flutter_otp_text_field: ^1.1.1
   flutter_secure_storage: ^3.3.4
   functional_data: ^0.3.0
   get_it: ^5.0.1
