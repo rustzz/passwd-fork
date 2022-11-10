@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider_for_redux/provider_for_redux.dart';
 import 'package:touch_bar/touch_bar.dart';
-import 'package:touch_bar_macos/touch_bar_macos.dart';
 
 import 'constants/colors.dart';
 import 'constants/theme.dart';
@@ -37,8 +36,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isMacOS) {
-      TouchBarPlugin.registerWith(); // hack
-
       setTouchBar(
         TouchBar(
           children: [

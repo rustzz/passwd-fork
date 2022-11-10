@@ -45,7 +45,7 @@ class _VerifyPinScreenState extends State<VerifyPinScreen> {
       await next();
     } else {
       setState(() {
-        error = 'Invalid pin entered';
+        error = context.getString('invalid_pin');
       });
     }
   }

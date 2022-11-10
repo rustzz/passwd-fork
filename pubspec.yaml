@@ -12,9 +12,9 @@ dependencies:
     sdk: flutter
   autofill_service:
     path: ./autofill_service
-  animations: ^1.1.2
+  animations: ^2.0.2
   archive: ^2.0.13
-  async_redux: ^6.0.1
+  async_redux: ^7.0.2
   barcode_scan: ^3.0.1
   base_x: ^1.0.1
   biometric_storage: ^1.1.0+1
@@ -31,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^3.3.4
   functional_data: ^0.3.0
   get_it: ^5.0.1
-  google_fonts: ^1.1.1
+  google_fonts: ^1.1.2
   injectable: ^1.0.5
   logging: ^0.11.4
   logging_appenders: ^0.4.3
@@ -46,8 +46,7 @@ dependencies:
   share: ^0.6.5+4
   shared_preferences: ^0.5.12+4
   supercharged: ^1.11.1
-  touch_bar: ^0.0.1-alpha.1
-  touch_bar_macos: ^0.0.1-alpha.1
+  touch_bar: ^0.1.0-alpha.1
   tuple: ^1.0.3
   url_launcher: 5.7.10
 

@@ -49,6 +49,7 @@
   "enable_biometrics": "Enable biometrics",
   "next": "Next",
   "enter_pin": "Please enter your PIN",
+  "invalid_pin": "Invalid pin entered",
   "biometrics_retry": "Retry with biometrics",
   "current_otp": "Current OTP",
   "search": "Search",

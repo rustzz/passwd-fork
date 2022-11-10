@@ -4,9 +4,12 @@ cls
 
 echo Clean all
 CALL flutter clean
-CALL flutter pub cache repair
 CALL flutter pub get
 echo Done clean all
+
+echo Testing on Windows
+CALL flutter run -d windows
+echo Done testing on Windows
 
 echo Resolving IDE warnings
 cd autofill_service
