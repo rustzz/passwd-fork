@@ -49,7 +49,7 @@
     "enable_biometrics": "Включить биометрию",
     "next": "Далее",
     "enter_pin": "Введите свой PIN",
-    "invalid_pin": "Не верный PIN",
+    "invalid_pin": "Неверный PIN",
     "biometrics_retry": "Повторить с биометрией",
     "current_otp": "Текущий OTP",
     "search": "Поиск",
