@@ -2,6 +2,8 @@
 
 A beautiful, encrypted password manager, built using Flutter and Dart.
 
+[Actual release](https://ci.rustzzdev.ru/)
+
 ## Features
 
 - Fully encrypted using XSalsa20-Poly1305 (including the database stored on-device)
@@ -39,26 +41,7 @@ Nothing is complete without screenshots :P
 
 ## Building
 
-- Install [Flutter](https://flutter.dev) [v2.0.0]
-- Install Visual Studio Build Tools 2019 v16
-- Install Android SDK
-- Clone the repository
-- Run: .\build.bat
-
-### Android
-
-- Connect your device / emulator to your computer
-- `flutter run`
-
-### iOS
-
-- Connect your device / simulator to your computer (only macs are supported)
-- `flutter run`
-
-### Desktop
-
-- Enable flutter desktop support (https://flutter.dev/desktop)
-- `flutter run`
+Check instructions in [.jenkins-pipeline](./.jenkins-pipeline)
 
 ## Changelog
 
