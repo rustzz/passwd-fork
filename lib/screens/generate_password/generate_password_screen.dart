@@ -113,6 +113,26 @@ class _GeneratePasswordScreenState extends State<GeneratePasswordScreen> {
           SizedBox(
             height: 12,
           ),
+          TextButton(
+            onPressed: () {
+              Clipboard.setData(
+                ClipboardData(
+                  text: password,
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    context.getString('copied_to_clipboard'),
+                  ),
+                ),
+              );
+            },
+            child: Text(context.getString('copy_password')),
+          ),
+          SizedBox(
+            height: 12,
+          ),
           SwitchListTile(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
