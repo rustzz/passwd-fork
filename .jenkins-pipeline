@@ -15,7 +15,19 @@ pipeline {
                 '''
             }
         }
-        
+        stage('CLEAN') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  if [ -d passwd-fork ]; then
+                    rm -rf passwd-fork
+                  fi
+                  if [ -d linux.tar.xz ]; then
+                    rm linux.tar.xz
+                  fi
+                '''
+            }
+        }
         stage('GIT PULL') {
             steps {
                 sh '''
@@ -53,8 +65,8 @@ pipeline {
             steps {
                 sh '''
                   #!/bin/sh
+                  export ANDROID_HOME=$(pwd)/env/Android/Sdk
                   if [ ! -d env/Android ]; then
-                      export ANDROID_HOME=$(pwd)/env/Android/Sdk
                       cd env
                       mkdir Android/Sdk -p
                       wget -nv https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
@@ -108,9 +120,18 @@ pipeline {
                 sh '''
                   #!/bin/sh
                   cd passwd-fork
-                  if [ ! -f android/app/keystore.key ]; then
-                    keytool -genkey -noprompt -alias key -dname "CN=passwd, OU=passwd, O=passwd, L=passwd, S=passwd, C=RU" -keystore android/app/keystore.key -storepass 123456 -keypass 123456
-                  fi
+                  keytool -genkey -storepass 123456 -keypass 123456 -v -noprompt -dname "CN=passwd, OU=passwd, O=passwd, L=passwd, S=passwd, C=RU" -keystore android/app/keystore.key -keyalg RSA -keysize 2048 -validity 10000 -alias key
+                '''
+            }
+        }
+        stage('FLUTTER CLEAN') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  export PATH=$PATH:$(pwd)/env/.flutter/bin
+                  cd passwd-fork
+                  flutter clean
+                  flutter pub get
                 '''
             }
         }
@@ -122,9 +143,19 @@ pipeline {
                   export ANDROID_SDK_ROOT=$(pwd)/env/Android/Sdk
                   export ANDROID_HOME=$(pwd)/env/Android/Sdk
                   cd passwd-fork
-                  flutter clean
-                  flutter pub get
                   flutter build apk --release
+                '''
+            }
+        }
+        stage('BUILD ANDROID BUNDLE') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  export PATH=$PATH:$(pwd)/env/.flutter/bin
+                  export ANDROID_SDK_ROOT=$(pwd)/env/Android/Sdk
+                  export ANDROID_HOME=$(pwd)/env/Android/Sdk
+                  cd passwd-fork
+                  flutter build appbundle --release
                 '''
             }
         }
@@ -155,11 +186,7 @@ pipeline {
     
     post {
         always {
-            archiveArtifacts artifacts: 'passwd-fork/build/**/*.apk, **/*.tar.xz', fingerprint: true
-            sh '''
-              #!/bin/sh
-              rm -rf passwd-fork
-            '''
+            archiveArtifacts artifacts: 'passwd-fork/build/**/*.apk, passwd-fork/build/app/outputs/bundle/release/*.aab, **/*.tar.xz', fingerprint: true
         }
     }
 }
