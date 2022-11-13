@@ -1,6 +1,6 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tech.akshit.passwd"
+    package="ru.rustzz.passwd"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,8 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
@@ -48,12 +49,13 @@
         <service
             android:name="design.codeux.autofill_service.FlutterMyAutofillService"
             android:label="Passwd Autofill"
-            tools:replace="android:label">
+            tools:replace="android:label"
+            android:exported="true">
             <meta-data android:name="design.codeux.autofill_service.unlock_label"
                 android:value="Passwd Autofill" />
         </service>
 
         <meta-data android:name="design.codeux.autofill_service.ACTIVITY_NAME"
-            android:value="tech.akshit.passwd.MainActivity" />
+            android:value="ru.rustzz.passwd.MainActivity" />
     </application>
 </manifest>

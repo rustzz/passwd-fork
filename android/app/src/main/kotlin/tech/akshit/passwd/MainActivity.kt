@@ -1,4 +1,4 @@
-package tech.akshit.passwd
+package ru.rustzz.passwd
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

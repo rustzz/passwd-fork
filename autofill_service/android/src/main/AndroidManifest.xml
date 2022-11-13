@@ -6,17 +6,20 @@
         <activity
             android:name=".DummyTestActivity"
             android:label="@string/title_activity_dummy_test"
-            android:taskAffinity=".DummyTestActivity">
+            android:taskAffinity=".DummyTestActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true" />
 
         <service
             android:name=".FlutterMyAutofillService"
             android:label="Flutter Autofill Service"
-            android:permission="android.permission.BIND_AUTOFILL_SERVICE">
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.autofill.AutofillService" />
             </intent-filter>

@@ -45,6 +45,7 @@ app.*.map.json
 
 # **/key.props
 **/key.jks
+**/keystore.key
 
 # Debug Info
 debugInfo/
