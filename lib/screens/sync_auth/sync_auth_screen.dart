@@ -229,12 +229,19 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                     ? null
                     : context.getString('password_invalid'),
               ),
-              // focusNode: passwordFocus,
               obscureText: true,
               textInputAction: TextInputAction.next,
-              onFieldSubmitted: (val) {
-                // notesFocus.requestFocus();
+              onFieldSubmitted: (val) {},
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            TextButton(
+              onPressed: () {
+                secretController.text = 'demo';
+                urlController.text = 'https://demo.passwd.rustzzdev.ru';
               },
+              child: Text(context.getString('use_demo_server')),
             ),
             SizedBox(
               height: 12,

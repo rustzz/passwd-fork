@@ -85,5 +85,6 @@
   "server_url_invalid": "The entered URL is not valid",
   "server_secret": "Server secret",
   "server_secret_invalid": "Server secret should not be empty",
-  "share": "Share"
+  "share": "Share",
+  "use_demo_server": "Use demo server"
 }

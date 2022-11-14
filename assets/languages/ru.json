@@ -85,6 +85,7 @@
     "server_url_invalid": "URL сервера не корректный",
     "server_secret": "Ключ сервера",
     "server_secret_invalid": "Ключ сервера не должен быть пустым",
-    "share": "Поделиться"
+    "share": "Поделиться",
+    "use_demo_server": "Использовать демо-сервер"
   }
   

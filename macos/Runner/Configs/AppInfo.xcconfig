@@ -11,4 +11,4 @@ PRODUCT_NAME = passwd
 PRODUCT_BUNDLE_IDENTIFIER = ru.rustzz.passwd
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2020 tech.akshit. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2020 ru.rustzz. All rights reserved.
