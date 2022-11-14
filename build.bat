@@ -23,6 +23,7 @@ CALL flutter build appbundle
 echo Done building AAB
 
 echo Building APK(s)
+CALL flutter build apk --release
 CALL flutter build apk --target-platform android-arm64 --split-per-abi
 CALL flutter build apk --target-platform android-arm --split-per-abi
 CALL flutter build apk --target-platform android-x64 --split-per-abi
