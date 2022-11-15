@@ -7,35 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('INSTALL REQUIREMENTS') {
-            steps {
-                sh '''
-                  apt -q update
-                  apt -q install -y git wget zip unzip xz-utils openjdk-11-jdk libsecret-1-dev libgtk-3-dev libblkid-dev liblzma-dev pkg-config clang ninja-build cmake
-                '''
-            }
-        }
-        stage('CLEAN') {
-            steps {
-                sh '''
-                  #!/bin/sh
-                  if [ -d passwd-fork ]; then
-                    rm -rf passwd-fork
-                  fi
-                  if [ -d linux.tar.xz ]; then
-                    rm linux.tar.xz
-                  fi
-                '''
-            }
-        }
-        stage('GIT PULL') {
-            steps {
-                sh '''
-                  #!/bin/sh
-                  git clone https://github.com/rustzz/passwd-fork
-                '''
-            }
-        }
         stage('PREPARE WORKSPACE') {
             steps {
                 sh '''
@@ -43,6 +14,27 @@ pipeline {
                   if [ ! -d env ]; then
                     mkdir env
                   fi
+                  echo '>>> CLEAN'
+                  if [ -d passwd-fork ]; then
+                    rm -rf passwd-fork
+                  fi
+                  if [ -f linux.tar.xz ]; then
+                    rm linux.tar.xz
+                  fi
+                  if [ -f env/flutter_linux_2.0.0-stable.tar.xz ]; then
+                    rm env/flutter_linux_2.0.0-stable.tar.xz
+                  fi
+                  if [ -f env/commandlinetools-linux-8512546_latest.zip ]; then
+                    rm env/commandlinetools-linux-8512546_latest.zip
+                  fi
+                  echo '>>> DONE CLEAN'
+                  echo '>>> INSTALL REQUIREMENTS'
+                  apt -q update
+                  apt -q install -y git wget zip unzip xz-utils openjdk-11-jdk libsecret-1-dev libgtk-3-dev libblkid-dev liblzma-dev pkg-config clang ninja-build cmake
+                  echo '>>> DONE INSTALL REQUIREMENTS'
+                  echo '>>> CLONE REPO'
+                  git clone https://github.com/rustzz/passwd-fork
+                  echo '>>> DONE CLONE REPO'
                 '''
             }
         }
@@ -52,11 +44,16 @@ pipeline {
                   #!/bin/sh
                   if [ ! -d env/.flutter ]; then
                     cd env
+                    echo '>>> DOWNLOAD ARCHIVE'
                     wget -nv https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.0.0-stable.tar.xz
+                    echo '>>> DONE DOWNLOAD ARCHIVE'
+                    echo '>>> UNPACK ARCHIVE'
                     tar xf flutter_linux_2.0.0-stable.tar.xz
+                    echo '>>> DONE UNPACK ARCHIVE'
                     mv flutter .flutter
+                    echo '>>> FIX PERMISSIONS'
                     chown root:root -R .flutter
-                    rm flutter_linux_2.0.0-stable.tar.xz
+                    echo '>>> DONE FIX PERMISSIONS'
                   fi
                 '''
             }
@@ -69,28 +66,35 @@ pipeline {
                   if [ ! -d env/Android ]; then
                       cd env
                       mkdir Android/Sdk -p
+                      echo '>>> DOWNLOAD ARCHIVE'
                       wget -nv https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
+                      echo '>>> DONE DOWNLOAD ARCHIVE'
+                      echo '>>> UNPACK ARCHIVE'
                       unzip -qq commandlinetools-linux-8512546_latest.zip -d Android/Sdk
                       mkdir Android/Sdk/cmdline-tools/latest
                       mv Android/Sdk/cmdline-tools/bin Android/Sdk/cmdline-tools/latest/
                       mv Android/Sdk/cmdline-tools/lib Android/Sdk/cmdline-tools/latest/
                       mv Android/Sdk/cmdline-tools/NOTICE.txt Android/Sdk/cmdline-tools/latest/
                       mv Android/Sdk/cmdline-tools/source.properties Android/Sdk/cmdline-tools/latest/
-                      rm commandlinetools-linux-8512546_latest.zip
+                      echo '>>> DONE UNPACK ARCHIVE'
                       cd ..
+                      echo '>>> INSTALL SDK TOOLS'
                       yes | ./env/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;30.0.3" "emulator" "platform-tools" "platforms;android-29" "tools"
+                      echo '>>> DONE INSTALL SDK TOOLS'
                   fi
                 '''
             }
         }
-        stage ('ACCEPT LICENSES') {
+        stage ('[FLUTTER] ACCEPT LICENSES') {
             steps {
                 sh '''
                   #!/bin/sh
                   export PATH=$PATH:$(pwd)/env/.flutter/bin
                   export ANDROID_SDK_ROOT=$(pwd)/env/Android/Sdk
                   export ANDROID_HOME=$(pwd)/env/Android/Sdk
+                  echo '>>> ACCEPT LICENSES'
                   yes | flutter doctor --android-licenses
+                  echo '>>> DONE ACCEPT LICENSES'
                 '''
             }
         }
@@ -110,7 +114,6 @@ pipeline {
                   export PATH=$PATH:$(pwd)/env/.flutter/bin
                   export ANDROID_SDK_ROOT=$(pwd)/env/Android/Sdk
                   export ANDROID_HOME=$(pwd)/env/Android/Sdk
-                  
                   flutter doctor -v
                 '''
             }
@@ -120,6 +123,10 @@ pipeline {
                 sh '''
                   #!/bin/sh
                   cd passwd-fork
+                  echo "storePassword=123456" >> android/key.props
+                  echo "keyPassword=123456" >> android/key.props
+                  echo "keyAlias=key" >> android/key.props
+                  echo "storeFile=keystore.key" >> android/key.props
                   keytool -genkey -storepass 123456 -keypass 123456 -v -noprompt -dname "CN=passwd, OU=passwd, O=passwd, L=passwd, S=passwd, C=RU" -keystore android/app/keystore.key -keyalg RSA -keysize 2048 -validity 10000 -alias key
                 '''
             }
@@ -135,6 +142,16 @@ pipeline {
                 '''
             }
         }
+        stage('FLUTTER TEST') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  export PATH=$PATH:$(pwd)/env/.flutter/bin
+                  cd passwd-fork
+                  flutter test
+                '''
+            }
+        }
         stage('BUILD APK') {
             steps {
                 sh '''
@@ -144,6 +161,9 @@ pipeline {
                   export ANDROID_HOME=$(pwd)/env/Android/Sdk
                   cd passwd-fork
                   flutter build apk --release
+                  flutter build apk --target-platform android-arm64 --split-per-abi
+                  flutter build apk --target-platform android-arm --split-per-abi
+                  flutter build apk --target-platform android-x64 --split-per-abi
                 '''
             }
         }
@@ -182,11 +202,37 @@ pipeline {
                 '''
             }
         }
+        stage('MOVE ARTEFACTS') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  cd passwd-fork
+                  mkdir files
+                  mv build/app/outputs/bundle/release/*-release.aab build/app/outputs/flutter-apk/*-release.apk ../*.xz files/
+                '''
+            }
+        }
+        stage('RENAME FILES') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  cd passwd-fork
+                  VER=$(grep -A0 'version:' pubspec.yaml | tail -n1 | awk '{ print $2}')
+                  cd files
+                  mv app-release.aab app-release-$VER.aab
+                  mv app-release.apk app-release-$VER.apk
+                  mv app-arm64-v8a-release.apk app-arm64-v8a-release-$VER.apk
+                  mv app-armeabi-v7a-release.apk app-armeabi-v7a-release-$VER.apk
+                  mv app-x86_64-release.apk app-x86_64-release-$VER.apk
+                  mv linux.tar.xz linux.$VER.tar.xz
+                '''
+            }
+        }
     }
     
     post {
         always {
-            archiveArtifacts artifacts: 'passwd-fork/build/**/*.apk, passwd-fork/build/app/outputs/bundle/release/*.aab, **/*.tar.xz', fingerprint: true
+            archiveArtifacts artifacts: 'passwd-fork/files/*', fingerprint: true
         }
     }
 }
