@@ -15,9 +15,12 @@ import 'screens/init/init_screen.dart';
 import 'services/locator.dart';
 import 'utils/desktop_window.dart';
 import 'utils/loggers.dart';
+import 'utils/update_certs.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  update_certs();
 
   setupLogging();
   Loggers.mainLogger.info('Passwd initialized');

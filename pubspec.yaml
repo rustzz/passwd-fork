@@ -1,6 +1,6 @@
 name: passwd
 description: A beautiful and secure password manager.
-version: 2.1.2
+version: 2.1.3
 author: Akshit Garg
 maintainer: rustzz
 publish_to: none
@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/data/
     - assets/languages/
+    - assets/ca/
 
 flutter_icons:
   android: true
