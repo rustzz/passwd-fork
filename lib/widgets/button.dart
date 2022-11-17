@@ -13,7 +13,6 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onClick,
-      child: child,
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all(Colors.white.withOpacity(0.14)),
@@ -22,6 +21,7 @@ class Button extends StatelessWidget {
           vertical: 2,
         ),
       ),
+      child: child,
     );
   }
 }

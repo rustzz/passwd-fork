@@ -11,26 +11,28 @@ abstract class DioModule {
 
 class LoggingInterceptor extends InterceptorsWrapper {
   @override
-  Future onRequest(RequestOptions request) async {
+  Future onRequest(
+      RequestOptions request, RequestInterceptorHandler wrapper) async {
     Loggers.networkLogger.info(
       '${request.method} ${request.uri.toString()}',
     );
-    return super.onRequest(request);
+    return super.onRequest(request, wrapper);
   }
 
   @override
-  Future onResponse(Response response) async {
+  Future onResponse(
+      Response response, ResponseInterceptorHandler wrapper) async {
     Loggers.networkLogger.info(
-      '${response.request.uri.toString()} ${response.statusCode} - ${response.data}',
+      '${response.requestOptions.uri.toString()} ${response.statusCode} - ${response.data}',
     );
-    return super.onResponse(response);
+    return super.onResponse(response, wrapper);
   }
 
   @override
-  Future onError(DioError error) async {
+  Future onError(DioError error, ErrorInterceptorHandler wrapper) async {
     Loggers.networkLogger.severe(
-      '${error.message} - ${error.request.method} ${error.request.uri.toString()}',
+      '${error.message} - ${error.requestOptions.method} ${error.requestOptions.uri.toString()}',
     );
-    return super.onError(error);
+    return super.onError(error, wrapper);
   }
 }

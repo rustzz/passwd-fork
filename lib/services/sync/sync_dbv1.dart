@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:injectable/injectable.dart';
 import 'package:msgpack_dart/msgpack_dart.dart';
 import 'package:path/path.dart' as path;
-import 'package:pinenacl/secret.dart';
+import 'package:pinenacl/x25519.dart';
 
 import '../../models/entries.dart';
 import '../advance_crypto/advance_crypto_service.dart';
@@ -95,6 +95,7 @@ class SyncDBv1 implements SyncService {
       final dbFile = File(filePath);
 
       if (!(await dbFile.exists())) {
+        // ignore: await_only_futures
         await dbFile.createSync(recursive: true);
       }
 

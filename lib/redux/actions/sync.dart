@@ -110,7 +110,7 @@ class PushEntriesAction extends ReduxAction<AppState> {
   @override
   void after() {
     dispatch(SyncIndicatorAction(isSyncing: false));
-    dispatchFuture(ReloadAction());
+    dispatchAsync(ReloadAction());
   }
 }
 

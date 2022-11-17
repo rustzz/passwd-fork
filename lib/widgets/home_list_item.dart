@@ -1,7 +1,7 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:autofill_service/autofill_service.dart';
+import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dart_otp/dart_otp.dart';
+import 'package:otp/otp.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,20 +48,20 @@ class _HomeListItemState extends State<HomeListItem> {
       ),
       items: [
         PopupMenuItem(
+          value: 0,
           child: Text(
             context
                 .getString('delete')
                 .replaceAll('%1', entry.name ?? entry.username),
           ),
-          value: 0,
         ),
         PopupMenuItem(
+          value: 1,
           child: Text(
             context
                 .getString('copy_pass_for')
                 .replaceAll('%1', entry.name ?? entry.username),
           ),
-          value: 1,
         ),
       ],
     );
@@ -155,7 +155,7 @@ class _HomeListItemState extends State<HomeListItem> {
             onPressed: () async {
               Navigator.of(context).pop();
 
-              await Provider.of<DispatchFuture>(
+              await Provider.of<DispatchAsync>(
                 context,
                 listen: false,
               )(RemoveEntryAction(entry));
@@ -187,13 +187,13 @@ class _HomeListItemState extends State<HomeListItem> {
       );
     } else {
       if (entry.otp != null) {
-        var totp = TOTP(
-          secret: entry.otp.secret,
-          algorithm: OTPAlgorithm.SHA1,
-          digits: entry.otp.digits,
+        var currentOtp = OTP.generateTOTPCodeString(
+          entry.otp.secret,
+          DateTime.now().millisecondsSinceEpoch,
+          algorithm: Algorithm.SHA1,
+          length: entry.otp.digits,
           interval: entry.otp.timeout,
         );
-        var currentOtp = totp.now();
         await Clipboard.setData(ClipboardData(text: currentOtp));
       }
 

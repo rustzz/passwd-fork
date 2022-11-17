@@ -61,13 +61,13 @@ class CornerFloatingActionButton extends StatelessWidget {
             child: SizedBox.fromSize(
               size: Size(height * 1.07, height),
               child: InkWell(
+                onTap: onTap,
                 child: IconTheme.merge(
                   data: IconThemeData(
                     color: foregroundColor,
                   ),
                   child: icon,
                 ),
-                onTap: onTap,
               ),
             ),
           ),

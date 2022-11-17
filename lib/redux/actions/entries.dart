@@ -66,8 +66,8 @@ class AddEntryAction extends ReduxAction<AppState> {
   @override
   void after() {
     dispatch(ReloadAction());
-    dispatchFuture(AddFaviconAction(entry));
-    dispatchFuture(PushEntriesAction());
+    dispatchAsync(AddFaviconAction(entry));
+    dispatchAsync(PushEntriesAction());
   }
 }
 
@@ -91,7 +91,7 @@ class ModifyEntryAction extends ReduxAction<AppState> {
   @override
   void after() {
     dispatch(ReloadAction());
-    dispatchFuture(PushEntriesAction());
+    dispatchAsync(PushEntriesAction());
   }
 }
 
@@ -114,6 +114,6 @@ class RemoveEntryAction extends ReduxAction<AppState> {
   @override
   void after() {
     dispatch(ReloadAction());
-    dispatchFuture(PushEntriesAction());
+    dispatchAsync(PushEntriesAction());
   }
 }

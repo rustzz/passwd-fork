@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:autofill_service/autofill_service.dart';
+import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -44,7 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: Text(context.getString('activate_autofill_service')),
               onTap: () async {
                 // TODO: abstract autofill
-                final response = await AutofillService().requestSetAutofillService();
+                final response =
+                    await AutofillService().requestSetAutofillService();
                 Loggers.mainLogger.info(
                   'Autofill requestSetAutofillService: ${response}',
                 );

@@ -10,5 +10,5 @@ class Loggers {
 
 void setupLogging() {
   Logger.root.level = Level.ALL;
-  PrintAppender()..attachToLogger(Logger.root);
+  PrintAppender().attachToLogger(Logger.root);
 }

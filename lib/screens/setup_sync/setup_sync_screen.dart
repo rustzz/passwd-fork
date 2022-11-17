@@ -33,7 +33,12 @@ class _SetupSyncScreenState extends State<SetupSyncScreen> {
           IconButton(
             icon: Icon(Feather.info),
             onPressed: () async {
-              await launch('https://github.com/passwdapp/box');
+              await launchUrl(
+                  Uri(
+                      scheme: 'https',
+                      host: 'github.com',
+                      path: 'passwdapp/box'),
+                  webOnlyWindowName: '');
             },
             tooltip: context.getString('documentation'),
           ),
@@ -84,12 +89,6 @@ class _SetupSyncScreenState extends State<SetupSyncScreen> {
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
-                      child: Text(
-                        context.getString('register'),
-                        style: TextStyle(
-                          color: Theme.of(context).canvasColor,
-                        ),
-                      ),
                       style: ButtonStyle(
                         side: MaterialStateProperty.all<BorderSide>(
                           BorderSide(
@@ -100,6 +99,12 @@ class _SetupSyncScreenState extends State<SetupSyncScreen> {
                       onPressed: () {
                         push(true);
                       },
+                      child: Text(
+                        context.getString('register'),
+                        style: TextStyle(
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(

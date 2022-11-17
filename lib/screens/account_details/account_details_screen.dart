@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:dart_otp/dart_otp.dart';
+import 'package:otp/otp.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:touch_bar/touch_bar.dart';
+// import 'package:touch_bar/touch_bar.dart';
 
 import '../add_account/add_account_screen.dart';
 import '../../models/entry.dart';
@@ -27,7 +26,6 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
 
   double percentage = 0.0;
   String currentOtp = '';
-  TOTP totp;
   Timer timer;
 
   @override
@@ -35,12 +33,6 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
     super.initState();
 
     if (widget.entry.otp != null) {
-      totp = TOTP(
-        secret: widget.entry.otp.secret,
-        algorithm: OTPAlgorithm.SHA1,
-        digits: widget.entry.otp.digits,
-        interval: widget.entry.otp.timeout,
-      );
       timer = Timer.periodic(
         const Duration(
           milliseconds: 100,
@@ -63,7 +55,13 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
 
   void genOtp() {
     setState(() {
-      currentOtp = totp.now();
+      currentOtp = OTP.generateTOTPCodeString(
+        widget.entry.otp.secret,
+        DateTime.now().millisecondsSinceEpoch,
+        algorithm: Algorithm.SHA1,
+        length: widget.entry.otp.digits,
+        interval: widget.entry.otp.timeout,
+      );
       percentage = (widget.entry.otp.timeout -
               (DateTime.now().second % widget.entry.otp.timeout)) /
           widget.entry.otp.timeout;
@@ -86,31 +84,31 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   }
 
   Future initTouchBar() async {
-    if (Platform.isMacOS) {
-      await setTouchBar(
-        TouchBar(
-          children: [
-            TouchBarLabel(
-              widget.entry.username,
-              textColor: Colors.white,
-            ),
-            TouchBarSpace.small(),
-            TouchBarButton(
-              label: context.getString('copy_password'),
-              onClick: () {
-                copyPassword();
-              },
-            ),
-            if (widget.entry.name != null) TouchBarSpace.flexible(),
-            if (widget.entry.name != null)
-              TouchBarLabel(
-                widget.entry.name,
-                textColor: Colors.white,
-              ),
-          ],
-        ),
-      );
-    }
+    // if (Platform.isMacOS) {
+    //   await setTouchBar(
+    //     TouchBar(
+    //       children: [
+    //         TouchBarLabel(
+    //           widget.entry.username,
+    //           textColor: Colors.white,
+    //         ),
+    //         TouchBarSpace.small(),
+    //         TouchBarButton(
+    //           label: context.getString('copy_password'),
+    //           onClick: () {
+    //             copyPassword();
+    //           },
+    //         ),
+    //         if (widget.entry.name != null) TouchBarSpace.flexible(),
+    //         if (widget.entry.name != null)
+    //           TouchBarLabel(
+    //             widget.entry.name,
+    //             textColor: Colors.white,
+    //           ),
+    //       ],
+    //     ),
+    //   );
+    // }
   }
 
   @override

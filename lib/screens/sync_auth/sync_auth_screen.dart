@@ -115,13 +115,13 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
 
                       // TODO: handle errors
                       if (widget.register) {
-                        await Provider.of<DispatchFuture>(context,
+                        await Provider.of<DispatchAsync>(context,
                             listen: false)(
                           RegisterAction(uri, secret, username, password),
                         );
                       }
 
-                      await Provider.of<DispatchFuture>(context, listen: false)(
+                      await Provider.of<DispatchAsync>(context, listen: false)(
                         LoginAction(uri, secret, username, password),
                       );
 
@@ -129,7 +129,7 @@ class _SyncAuthScreenState extends State<SyncAuthScreen> {
                         LoginStateAction(true),
                       );
 
-                      await Provider.of<DispatchFuture>(context, listen: false)(
+                      await Provider.of<DispatchAsync>(context, listen: false)(
                         PushEntriesAction(),
                       );
 

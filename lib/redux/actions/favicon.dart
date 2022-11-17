@@ -27,7 +27,7 @@ class AddFaviconAction extends ReduxAction<AppState> {
 
       if (favicon.isNotEmpty) {
         final newEntry = entry..favicon = favicon;
-        await dispatchFuture(ModifyEntryAction(entry, newEntry));
+        await dispatchAsync(ModifyEntryAction(entry, newEntry));
       }
     }
     return null;

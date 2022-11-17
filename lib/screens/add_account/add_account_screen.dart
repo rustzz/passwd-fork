@@ -209,14 +209,13 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
       otp: otp,
     );
 
-    await Provider.of<DispatchFuture>(context, listen: false)(ModifyEntryAction(
+    await Provider.of<DispatchAsync>(context, listen: false)(ModifyEntryAction(
       widget.entry,
       data,
     ));
 
     if (data.name != widget.entry.name) {
-      await Provider.of<DispatchFuture>(context, listen: false)(
-          AddFaviconAction(
+      await Provider.of<DispatchAsync>(context, listen: false)(AddFaviconAction(
         data,
       ));
     }

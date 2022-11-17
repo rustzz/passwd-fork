@@ -23,11 +23,11 @@ class CloudHashImpl implements CloudHashService {
       digest = hmac.convert(digest.bytes);
     }
 
-    final hkdf = Hkdf(Hmac(sha512));
+    final hkdf = Hkdf(hmac: Hmac.sha512(), outputLength: 32);
     final input = SecretKey(digest.toString().codeUnits);
-    final output = await hkdf.deriveKey(input, outputLength: 32);
+    final output = await hkdf.deriveKey(secretKey: input);
 
-    return (await output.extract());
+    return await output.extractBytes();
   }
 
   @override

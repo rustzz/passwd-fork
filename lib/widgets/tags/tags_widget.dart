@@ -69,7 +69,7 @@ class _TagsWidgetState extends State<TagsWidget> {
   }
 
   Future addTag(Tag tag) async {
-    await Provider.of<DispatchFuture>(
+    await Provider.of<DispatchAsync>(
       context,
       listen: false,
     )(AddTagAction(tag));

@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:dart_otp/dart_otp.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:otp/otp.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../constants/colors.dart';
@@ -22,19 +21,12 @@ class _OtpWidgetState extends State<OtpWidget> {
   double percentage = 0.0;
   String currentOtp = '';
 
-  TOTP totp;
   Timer timer;
 
   @override
   void initState() {
     super.initState();
 
-    totp = TOTP(
-      secret: widget.otp.secret,
-      algorithm: OTPAlgorithm.SHA1,
-      digits: widget.otp.digits,
-      interval: widget.otp.timeout,
-    );
     timer = Timer.periodic(
       const Duration(
         milliseconds: 100,
@@ -48,7 +40,13 @@ class _OtpWidgetState extends State<OtpWidget> {
 
   void genOtp() {
     setState(() {
-      currentOtp = totp.now();
+      currentOtp = OTP.generateTOTPCodeString(
+        widget.otp.secret,
+        DateTime.now().millisecondsSinceEpoch,
+        algorithm: Algorithm.SHA1,
+        length: widget.otp.digits,
+        interval: widget.otp.timeout,
+      );
       percentage =
           (widget.otp.timeout - (DateTime.now().second % widget.otp.timeout)) /
               widget.otp.timeout;

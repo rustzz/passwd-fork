@@ -21,11 +21,13 @@ class BiometricsBiometricStorage implements BiometricsService {
         options: StorageFileInitOptions(
           authenticationRequired: true,
         ),
-        androidPromptInfo: AndroidPromptInfo(
-          confirmationRequired: true,
-          negativeButton: 'Cancel', // TODO: localize
-          description: '',
-          title: 'Passwd',
+        promptInfo: PromptInfo(
+          androidPromptInfo: AndroidPromptInfo(
+            confirmationRequired: true,
+            negativeButton: 'Cancel', // TODO: localize
+            description: '',
+            title: 'Passwd',
+          ),
         ),
       );
       return BiometricsResult.AUTHENTICATED;

@@ -1,8 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:injectable/injectable.dart';
 import 'package:msgpack_dart/msgpack_dart.dart';
-import 'package:pinenacl/secret.dart';
+import 'package:pinenacl/x25519.dart';
 
 import '../../constants/api.dart';
 import '../../models/entries.dart';

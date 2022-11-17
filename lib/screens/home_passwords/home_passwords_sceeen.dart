@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:async_redux/async_redux.dart';
@@ -6,7 +5,7 @@ import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:touch_bar/touch_bar.dart';
+// import 'package:touch_bar/touch_bar.dart';
 
 import '../../constants/colors.dart';
 import '../../models/entry.dart';
@@ -16,7 +15,6 @@ import '../../redux/appstate.dart';
 import '../../utils/navigation_utils.dart';
 import '../../widgets/home_list_item.dart';
 import '../../widgets/title.dart';
-import '../account_details/account_details_screen.dart';
 import '../add_account/add_account_screen.dart';
 import '../search/search_screen.dart';
 import '../settings/settings_screen.dart';
@@ -35,7 +33,7 @@ class _HomePasswordsScreenState extends State<HomePasswordsScreen> {
     Entry entry = await navigate(context, AddAccountScreen());
 
     if (entry != null) {
-      await Provider.of<DispatchFuture>(
+      await Provider.of<DispatchAsync>(
         context,
         listen: false,
       )(AddEntryAction(entry));
@@ -43,42 +41,42 @@ class _HomePasswordsScreenState extends State<HomePasswordsScreen> {
   }
 
   Future initTouchBar(List<Entry> entries) async {
-    if (entries.isNotEmpty && Platform.isMacOS) {
-      await setTouchBar(
-        TouchBar(
-          children: [
-            TouchBarButton(
-              label: context.getString('add_account'),
-              onClick: () {
-                addAccount();
-              },
-            ),
-            TouchBarScrubber(
-              mode: ScrubberMode.free,
-              isContinuous: false,
-              onSelect: (i) async {
-                await navigate(
-                  context,
-                  AccountDetailsScreen(
-                    entry: entries[i],
-                  ),
-                );
+    //   if (entries.isNotEmpty && Platform.isMacOS) {
+    //     await setTouchBar(
+    //       TouchBar(
+    //         children: [
+    //           TouchBarButton(
+    //             label: context.getString('add_account'),
+    //             onClick: () {
+    //               addAccount();
+    //             },
+    //           ),
+    //           TouchBarScrubber(
+    //             mode: ScrubberMode.free,
+    //             isContinuous: false,
+    //             onSelect: (i) async {
+    //               await navigate(
+    //                 context,
+    //                 AccountDetailsScreen(
+    //                   entry: entries[i],
+    //                 ),
+    //               );
 
-                return await initTouchBar(entries);
-              },
-              children: entries
-                  .map(
-                    (e) => TouchBarScrubberLabel(
-                      e.name,
-                      textColor: Colors.white,
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
-      );
-    }
+    //               return await initTouchBar(entries);
+    //             },
+    //             children: entries
+    //                 .map(
+    //                   (e) => TouchBarScrubberLabel(
+    //                     e.name,
+    //                     textColor: Colors.white,
+    //                   ),
+    //                 )
+    //                 .toList(),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   }
   }
 
   @override
@@ -230,7 +228,7 @@ class _HomePasswordsScreenState extends State<HomePasswordsScreen> {
           ? noEntriesLayout
           : RefreshIndicator(
               onRefresh: () async {
-                await Provider.of<DispatchFuture>(context, listen: false)(
+                await Provider.of<DispatchAsync>(context, listen: false)(
                     PushEntriesAction());
               },
               displacement: MediaQuery.of(context).padding.top +

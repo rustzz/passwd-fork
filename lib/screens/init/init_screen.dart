@@ -54,13 +54,13 @@ class _InitScreenState extends State<InitScreen> {
   @override
   Widget build(BuildContext context) {
     if (widget.dispatchAutofill) {
-      Provider.of<DispatchFuture>(
+      Provider.of<DispatchAsync>(
         context,
         listen: false,
       )(AutoFillLaunchTypeAction());
     }
 
-    Provider.of<DispatchFuture>(
+    Provider.of<DispatchAsync>(
       context,
       listen: false,
     )(CheckLoginAction());

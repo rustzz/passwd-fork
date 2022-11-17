@@ -8,7 +8,7 @@ import '../home_passwords/home_passwords_sceeen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Provider.of<DispatchFuture>(
+    Provider.of<DispatchAsync>(
       context,
       listen: false,
     )(ReloadAction(reloadFromDisk: true));

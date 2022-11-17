@@ -78,6 +78,7 @@ class SyncImpl implements SyncService {
       final dbFile = File(filePath);
 
       if (!(await dbFile.exists())) {
+        // ignore: await_only_futures
         await dbFile.createSync(recursive: true);
       }
 

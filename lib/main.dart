@@ -5,7 +5,7 @@ import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider_for_redux/provider_for_redux.dart';
-import 'package:touch_bar/touch_bar.dart';
+// import 'package:touch_bar/touch_bar.dart';
 
 import 'constants/colors.dart';
 import 'constants/theme.dart';
@@ -38,18 +38,18 @@ Future main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (Platform.isMacOS) {
-      setTouchBar(
-        TouchBar(
-          children: [
-            TouchBarLabel(
-              'Passwd.',
-              textColor: primaryColor,
-            ),
-          ],
-        ),
-      );
-    }
+    // if (Platform.isMacOS) {
+    //   setTouchBar(
+    //     TouchBar(
+    //       children: [
+    //         TouchBarLabel(
+    //           'Passwd.',
+    //           textColor: primaryColor,
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
 
     return AsyncReduxProvider<AppState>.value(
       value: Store<AppState>(

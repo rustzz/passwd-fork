@@ -1,7 +1,6 @@
 name: passwd
 description: A beautiful and secure password manager.
 version: 2.1.3
-author: Akshit Garg
 maintainer: rustzz
 publish_to: none
 
@@ -11,55 +10,51 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  autofill_service:
-    path: ./autofill_service
-  animations: ^2.0.2
-  archive: ^2.0.13
-  async_redux: ^7.0.2
-  barcode_scan: ^3.0.1
-  base_x: ^1.0.1
-  biometric_storage: ^1.1.0+1
-  cached_network_image: ^2.3.3
-  crypto: ^2.1.5
-  cryptography: ^1.4.1
-  dart_otp: ^1.3.0
-  desktop_window: ^0.3.0
-  dio: ^3.0.10
-  encrypt: ^4.1.0
-  ez_localization: ^0.3.0+1
+  animations: ^2.0.7
+  archive: ^3.3.4
+  async_redux: any
+  base_x: ^2.0.0
+  biometric_storage: ^4.1.3
+  cached_network_image: ^3.2.2
+  crypto: ^3.0.2
+  cryptography: ^2.0.5
+  otp: ^3.1.3
+  desktop_window: ^0.4.0
+  dio: ^4.0.6
+  encrypt: ^5.0.1
+  ez_localization: ^1.0.0+2
   flutter_icons: ^1.1.0
   flutter_otp_text_field: ^1.1.1
-  flutter_secure_storage: ^3.3.4
-  functional_data: ^0.3.0
-  get_it: ^5.0.1
-  google_fonts: ^1.1.2
-  injectable: ^1.0.5
-  logging: ^0.11.4
-  logging_appenders: ^0.4.3
-  msgpack_dart: ^0.0.7
-  path: ^1.8.0-nullsafety.1
-  path_provider: ^1.6.24
-  percent_indicator: ^2.1.8
-  pinenacl: ^0.1.3
-  provider: ^4.3.2+2
-  provider_for_redux: ^1.1.3
-  responsive_builder: ^0.3.0
-  share: ^0.6.5+4
-  shared_preferences: ^0.5.12+4
-  supercharged: ^1.11.1
-  touch_bar: ^0.1.0-alpha.1
-  tuple: ^1.0.3
-  url_launcher: 5.7.10
+  flutter_secure_storage: ^6.0.0
+  functional_data: ^1.0.0
+  get_it: ^7.2.0
+  google_fonts: ^3.0.1
+  injectable: ^1.5.4
+  logging: ^1.1.0
+  logging_appenders: ^1.0.0
+  msgpack_dart: ^1.0.0
+  path: ^1.8.2
+  path_provider: ^2.0.11
+  percent_indicator: ^4.2.2
+  pinenacl: ^0.5.1
+  provider: ^6.0.4
+  provider_for_redux: ^5.0.0
+  responsive_builder: ^0.4.3
+  share: ^2.0.4
+  shared_preferences: ^2.0.15
+  supercharged: ^2.1.1
+  tuple: ^2.0.1
+  url_launcher: ^6.1.6
+  flutter_autofill_service: ^0.14.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.2
-  flutter_launcher_icons: ^0.8.1
-  functional_data_generator: ^0.3.7
-  injectable_generator: ^1.0.5
-  pedantic: ^1.9.2
-  lints: ^1.0.1
+  build_runner: ^2.3.2
+  flutter_launcher_icons: ^0.11.0
+  functional_data_generator: ^1.1.4
+  injectable_generator: ^1.5.5
+  lints: ^2.0.1
 
 flutter:
   uses-material-design: true

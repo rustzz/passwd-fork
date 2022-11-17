@@ -87,14 +87,14 @@ class AdvanceCryptoAes implements AdvanceCryptoService {
   Future<Uint8List> deriveKey(
     String password,
   ) async {
-    final hkdf = Hkdf(Hmac(sha512));
+    final hkdf = Hkdf(hmac: Hmac.sha512(), outputLength: 32);
     final input = SecretKey(
       utf8.encode(
         cryptoService.hmac(utf8.encode(password)),
       ),
     );
-    final output = await hkdf.deriveKey(input, outputLength: 32);
+    final output = await hkdf.deriveKey(secretKey: input);
 
-    return await output.extract();
+    return await output.extractBytes();
   }
 }
