@@ -64,7 +64,7 @@ class DummyTestActivity : FragmentActivity() {
             this,
             1,
             startIntent,
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_CANCEL_CURRENT
         ).intentSender
         logger.debug { "startIntent:$startIntent (${startIntent.extras}) - sender: $intentSender" }
 

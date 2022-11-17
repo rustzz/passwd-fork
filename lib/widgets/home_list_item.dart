@@ -186,21 +186,22 @@ class _HomeListItemState extends State<HomeListItem> {
         ),
       );
     } else {
-      var totp = TOTP(
-        secret: entry.otp.secret,
-        algorithm: OTPAlgorithm.SHA1,
-        digits: entry.otp.digits,
-        interval: entry.otp.timeout,
-      );
+      if (entry.otp != null) {
+        var totp = TOTP(
+          secret: entry.otp.secret,
+          algorithm: OTPAlgorithm.SHA1,
+          digits: entry.otp.digits,
+          interval: entry.otp.timeout,
+        );
+        var currentOtp = totp.now();
+        await Clipboard.setData(ClipboardData(text: currentOtp));
+      }
 
       final response = await AutofillService().resultWithDataset(
         label: entry.name ?? entry.username,
         username: entry.username,
         password: entry.password,
       );
-      
-      var currentOtp = totp.now();
-      await Clipboard.setData(ClipboardData(text: currentOtp));
 
       Loggers.mainLogger.info('autofill $response');
     }
